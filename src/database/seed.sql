@@ -4,12 +4,14 @@
 
 -- -------------------------
 -- USERS (3 dont 1 admin)
--- password = 123456 (bcrypt)
+-- admin: password = admin1234
+-- alice: password = alice1234
+-- bob: password = bob1234
 -- -------------------------
 INSERT INTO users (username, email, password_hash, role) VALUES
-('admin','admin@test.com','admin1234','ADMIN'),
-('alice', 'alice@test.com','alice1234','USER'),
-('bob','bob@test.com','bob1234','USER');
+('admin','admin@test.com','$2b$10$QUU/nARXrFPX4eWKwu3yRe..SMpXStwH2UWwGURKpm9HTJPpdxpnm','ADMIN'),
+('alice', 'alice@test.com','$2b$10$klGdyurWrV1GZVMTAmh5H.AhE5NmCarWFAboTY7akgtFg4SX9mYsS','USER'),
+('bob','bob@test.com','$2b$10$qqApLcsUjnXSQj94eOsKven170tUvlg8Vn18MWgom.OfqDiehWKZ6','USER');
 
 -- -------------------------
 -- BOOKS (10 minimum)
