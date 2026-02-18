@@ -77,7 +77,7 @@ RETURNS TABLE(id INT, title VARCHAR, author VARCHAR, isbn VARCHAR, stock INT, cr
   LIMIT 10;
 $$ LANGUAGE SQL;
 
--- Function to get top users by borrowing count
+-- Function to get top users by borrowing count (USER role only, exclude ADMIN)
 CREATE OR REPLACE FUNCTION top_users()
 RETURNS TABLE(id INT, username VARCHAR, email VARCHAR, role VARCHAR, created_at TIMESTAMP, count BIGINT) AS $$
   SELECT
@@ -89,6 +89,7 @@ RETURNS TABLE(id INT, username VARCHAR, email VARCHAR, role VARCHAR, created_at 
     COUNT(bor.id) as count
   FROM users u
   LEFT JOIN borrowings bor ON u.id = bor.user_id
+  WHERE u.role = 'USER'
   GROUP BY u.id, u.username, u.email, u.role, u.created_at
   ORDER BY count DESC
   LIMIT 10;
